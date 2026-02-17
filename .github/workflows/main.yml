@@ -1,23 +1,24 @@
 name: Upload file to S3 on main push
 
 on:
-  push:
-    branches: ["main"]
-  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
-  upload:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
-      - name: Configure AWS creds
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-2
+      - name: Configure AWS creds
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.aws_access_key_id}}
+          aws-secret-access-key: ${{ secrets.aws_secret_access_key}}
+          aws-region: us-east-2
 
-      - name: Upload file
-        run: |
-          aws s3 cp test.sh s3://demobucketkrish2/test.sh
+      - name: Upload file
+        run: |
+          aws s3 cp test.sh s3://demobucketkrish2/test.sh
